@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Your Quick CV dashboard — manage all your CVs." />
+  <title>Dashboard — Quick CV</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <a href="index.html" aria-label="Quick CV Home">
+        <span class="brand-icon">⚡</span> Quick CV
+      </a>
+    </div>
+    <div class="nav-links">
+      <span class="nav-user" id="nav-user-name" aria-live="polite"></span>
+      <button class="btn btn-ghost" id="logout-btn" aria-label="Log out">Log Out</button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="dashboard-container">
+
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div>
+        <h1 id="dashboard-greeting">My CVs</h1>
+        <p class="dashboard-sub">Create, edit, and manage all your CVs in one place.</p>
+      </div>
+      <button class="btn btn-primary" id="create-cv-btn" aria-label="Create a new CV">
+        + New CV
+      </button>
+    </header>
+
+    <!-- Alert -->
+    <div id="alert-box" class="alert hidden" role="alert" aria-live="polite"></div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="loading-state" aria-live="polite" aria-label="Loading CVs">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Loading your CVs...</p>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="empty-state hidden" aria-live="polite">
+      <span class="empty-icon" aria-hidden="true">📄</span>
+      <h2>No CVs yet</h2>
+      <p>Click <strong>New CV</strong> to create your first CV.</p>
+      <button class="btn btn-primary" id="empty-create-btn" aria-label="Create your first CV">
+        Create My First CV
+      </button>
+    </div>
+
+    <!-- CV Grid -->
+    <section id="cv-grid" class="cv-grid hidden" aria-label="Your saved CVs">
+      <!-- CV cards injected by dashboard.js -->
+    </section>
+
+  </main>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+      <h2 id="modal-title">Delete CV?</h2>
+      <p>Are you sure you want to delete <strong id="modal-cv-title"></strong>? This cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="modal-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="modal-confirm-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <p>&copy; 2026 Quick CV.</p>
+  </footer>
+
+  <script type="module" src="assets/js/modules/dashboard.js"></script>
+</body>
+</html>

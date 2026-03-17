@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Edit your CV with live preview." />
+  <title>CV Editor — Quick CV</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/editor.css" />
+  <link rel="stylesheet" href="assets/css/templates.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <a href="dashboard.html" aria-label="Back to Dashboard">
+        <span class="brand-icon">⚡</span> Quick CV
+      </a>
+    </div>
+    <div class="nav-links nav-editor-actions">
+      <span class="save-status" id="save-status" aria-live="polite"></span>
+      <button class="btn btn-ghost" id="save-btn" aria-label="Save CV">💾 Save</button>
+      <button class="btn btn-primary" id="export-btn" aria-label="Export CV as PDF">📥 Export PDF</button>
+      <a href="dashboard.html" class="btn btn-ghost" aria-label="Back to dashboard">← Dashboard</a>
+    </div>
+  </nav>
+
+  <!-- ALERT -->
+  <div id="alert-box" class="alert hidden" role="alert" aria-live="polite"></div>
+
+  <!-- EDITOR LAYOUT -->
+  <div class="editor-layout">
+
+    <!-- LEFT PANEL: FORM -->
+    <aside class="editor-panel" aria-label="CV form editor">
+
+      <!-- CV Title + Template Selector -->
+      <div class="editor-section editor-meta">
+        <div class="form-group">
+          <label for="cv-title">CV Title</label>
+          <input type="text" id="cv-title" placeholder="e.g. Software Engineer CV" aria-label="CV title" />
+        </div>
+        <div class="form-group">
+          <label for="template-select">Template</label>
+          <div class="template-selector" role="group" aria-label="Choose a CV template">
+            <button type="button" class="template-btn active" data-template="modern" aria-pressed="true">
+              Modern
+            </button>
+            <button type="button" class="template-btn" data-template="classic" aria-pressed="false">
+              Classic
+            </button>
+            <button type="button" class="template-btn" data-template="minimal" aria-pressed="false">
+              Minimal
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="editor-tabs" role="tablist" aria-label="CV sections">
+        <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-personal" id="btn-personal" data-tab="personal">Personal</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-education" id="btn-education" data-tab="education">Education</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-experience" id="btn-experience" data-tab="experience">Experience</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-skills" id="btn-skills" data-tab="skills">Skills</button>
+      </div>
+
+      <!-- TAB: PERSONAL INFO -->
+      <div class="tab-panel active" id="tab-personal" role="tabpanel" aria-labelledby="btn-personal">
+        <h2 class="section-title">Personal Information</h2>
+        <div class="form-group">
+          <label for="pi-name">Full Name</label>
+          <input type="text" id="pi-name" placeholder="John Doe" autocomplete="name" />
+        </div>
+        <div class="form-group">
+          <label for="pi-email">Email Address</label>
+          <input type="email" id="pi-email" placeholder="john@example.com" autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="pi-phone">Phone Number</label>
+          <input type="tel" id="pi-phone" placeholder="07123 456789" autocomplete="tel" />
+        </div>
+        <div class="form-group">
+          <label for="pi-location">Location</label>
+          <input type="text" id="pi-location" placeholder="e.g. Wrexham, UK" />
+        </div>
+        <div class="form-group">
+          <label for="pi-website">Website / LinkedIn</label>
+          <input type="url" id="pi-website" placeholder="https://linkedin.com/in/johndoe" autocomplete="url" />
+        </div>
+        <div class="form-group">
+          <label for="pi-summary">Professional Summary</label>
+          <textarea id="pi-summary" rows="4" placeholder="Brief summary of your background, skills, and goals..."></textarea>
+        </div>
+      </div>
+
+      <!-- TAB: EDUCATION -->
+      <div class="tab-panel hidden" id="tab-education" role="tabpanel" aria-labelledby="btn-education">
+        <div class="section-header">
+          <h2 class="section-title">Education</h2>
+          <button type="button" class="btn btn-sm btn-primary" id="add-education-btn" aria-label="Add education entry">+ Add</button>
+        </div>
+        <div id="education-list" aria-label="Education entries">
+          <!-- Entries injected by cvForm.js -->
+        </div>
+      </div>
+
+      <!-- TAB: EXPERIENCE -->
+      <div class="tab-panel hidden" id="tab-experience" role="tabpanel" aria-labelledby="btn-experience">
+        <div class="section-header">
+          <h2 class="section-title">Work Experience</h2>
+          <button type="button" class="btn btn-sm btn-primary" id="add-experience-btn" aria-label="Add work experience entry">+ Add</button>
+        </div>
+        <div id="experience-list" aria-label="Work experience entries">
+          <!-- Entries injected by cvForm.js -->
+        </div>
+      </div>
+
+      <!-- TAB: SKILLS -->
+      <div class="tab-panel hidden" id="tab-skills" role="tabpanel" aria-labelledby="btn-skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="form-group">
+          <label for="skill-input">Add a Skill</label>
+          <div class="skill-input-row">
+            <input type="text" id="skill-input" placeholder="e.g. Python" aria-label="Enter a skill" />
+            <button type="button" class="btn btn-sm btn-primary" id="add-skill-btn" aria-label="Add skill">Add</button>
+          </div>
+        </div>
+        <div id="skills-list" class="skills-tags" aria-label="Added skills" aria-live="polite">
+          <!-- Skill tags injected by cvForm.js -->
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT PANEL: LIVE PREVIEW -->
+    <main class="preview-panel" aria-label="CV live preview">
+      <div class="preview-toolbar">
+        <span class="preview-label">Live Preview</span>
+        <span class="preview-template-badge" id="preview-template-badge">Modern</span>
+      </div>
+      <div class="preview-wrapper">
+        <div id="cv-preview" class="cv-preview template-modern" aria-live="polite" aria-label="CV preview">
+          <!-- Rendered by preview.js -->
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script type="module" src="assets/js/modules/cvForm.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Log in to your Quick CV account." />
+  <title>Log In — Quick CV</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body class="auth-page">
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <a href="index.html" aria-label="Quick CV Home">
+        <span class="brand-icon">⚡</span> Quick CV
+      </a>
+    </div>
+  </nav>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h1>Welcome Back</h1>
+        <p>Log in to manage your CVs</p>
+      </div>
+
+      <div id="alert-box" class="alert hidden" role="alert" aria-live="polite"></div>
+
+      <form id="login-form" class="auth-form" novalidate aria-label="Login form">
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="required" aria-hidden="true">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="e.g. john@example.com"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-describedby="email-error"
+          />
+          <span class="field-error" id="email-error" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password <span class="required" aria-hidden="true">*</span></label>
+          <div class="input-with-toggle">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Your password"
+              autocomplete="current-password"
+              required
+              aria-required="true"
+              aria-describedby="password-error"
+            />
+            <button type="button" class="toggle-password" aria-label="Toggle password visibility" data-target="password">
+              👁️
+            </button>
+          </div>
+          <span class="field-error" id="password-error" role="alert"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+          <span class="btn-text">Log In</span>
+          <span class="btn-spinner hidden" aria-hidden="true">⏳</span>
+        </button>
+
+      </form>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="register.html">Register here</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="assets/js/modules/auth.js"></script>
+</body>
+</html>
