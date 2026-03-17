@@ -1,0 +1,261 @@
+/* =========================================================
+   EDITOR CSS — CV Builder Page
+   ========================================================= */
+
+/* LAYOUT */
+.editor-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  height: calc(100vh - var(--navbar-height));
+  overflow: hidden;
+}
+
+/* LEFT PANEL */
+.editor-panel {
+  background: var(--color-bg-white);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-section {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.editor-meta {
+  background: var(--color-bg);
+}
+
+/* Template Selector */
+.template-selector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.template-btn {
+  padding: 0.35rem 0.9rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-white);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.template-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.template-btn.active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* TABS */
+.editor-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.tab-btn:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.tab-btn.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.tab-btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
+/* TAB PANELS */
+.tab-panel {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+/* Section header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+/* Entry Card (Education/Experience) */
+.entry-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.entry-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.entry-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.entry-remove-btn {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
+}
+
+.entry-remove-btn:hover {
+  background: var(--color-danger-light);
+}
+
+/* Skills */
+.skill-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.skill-input-row input {
+  flex: 1;
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.skill-remove {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.skill-remove:hover {
+  color: var(--color-danger);
+}
+
+/* Save Status */
+.save-status {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* RIGHT PANEL: PREVIEW */
+.preview-panel {
+  background: #e2e8f0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-bg-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.preview-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.preview-template-badge {
+  font-size: var(--font-size-xs);
+  background: var(--color-primary);
+  color: white;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.preview-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 2rem;
+}
+
+/* CV Preview Document */
+.cv-preview {
+  background: white;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-base);
+  line-height: 1.5;
+  font-size: 10pt;
+  color: #000;
+  transform-origin: top center;
+}
+
+/* Nav editor actions */
+.nav-editor-actions {
+  gap: 0.5rem;
+}

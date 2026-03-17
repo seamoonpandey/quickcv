@@ -1,0 +1,169 @@
+/* =========================================================
+   RESPONSIVE CSS — Quick CV
+   Mobile First Breakpoints
+   ========================================================= */
+
+/* ---- Tablet: max 900px ---- */
+@media (max-width: 900px) {
+
+  .hero {
+    flex-direction: column;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: 100%;
+  }
+
+  .cv-mockup {
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  .features {
+    padding: 3rem 2rem;
+  }
+
+  .editor-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+  }
+
+  .editor-panel {
+    border-right: none;
+    border-bottom: 2px solid var(--color-border);
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .preview-panel {
+    min-height: 80vh;
+  }
+
+  .preview-wrapper {
+    padding: 1rem;
+  }
+
+  .cv-preview {
+    width: 100%;
+    min-height: auto;
+    padding: 1.5rem;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-header button {
+    align-self: flex-start;
+  }
+
+}
+
+/* ---- Mobile: max 600px ---- */
+@media (max-width: 600px) {
+
+  .navbar {
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-card {
+    padding: 1.75rem 1.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .cv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .editor-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    min-width: 72px;
+  }
+
+  .modal-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .template-selector {
+    justify-content: center;
+  }
+
+  .nav-editor-actions {
+    gap: 0.25rem;
+  }
+
+  .nav-editor-actions .btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.7rem;
+  }
+
+  .save-status {
+    display: none;
+  }
+
+}
+
+/* ---- Print Styles --- */
+@media print {
+  .navbar,
+  .editor-panel,
+  .preview-toolbar,
+  .footer {
+    display: none !important;
+  }
+
+  .editor-layout {
+    display: block;
+  }
+
+  .preview-panel {
+    background: white;
+    padding: 0;
+  }
+
+  .preview-wrapper {
+    padding: 0;
+  }
+
+  .cv-preview {
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+  }
+}
