@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Update your Quick CV profile details." />
+  <title>Profile — Quick CV</title>
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/profile.css" />
+  <link rel="stylesheet" href="assets/css/responsive.css" />
+</head>
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <a href="dashboard.html" aria-label="Back to dashboard">
+        <span class="brand-icon">⚡</span> Quick CV
+      </a>
+    </div>
+    <div class="nav-links">
+      <a class="btn btn-outline" href="dashboard.html">← Dashboard</a>
+      <button class="btn btn-ghost" id="logout-btn" aria-label="Log out">Log Out</button>
+    </div>
+  </nav>
+
+  <main class="profile-container">
+    <section class="profile-card" aria-label="Profile form">
+      <div class="profile-header">
+        <div>
+          <p class="eyebrow">Account</p>
+          <h1>Profile Settings</h1>
+          <p class="sub">Update your name, email, or change your password.</p>
+        </div>
+      </div>
+
+      <div id="alert-box" class="alert hidden" role="alert" aria-live="polite"></div>
+
+      <form id="profile-form" class="profile-form" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" name="full_name" placeholder="e.g. Alex Johnson" autocomplete="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+          </div>
+        </div>
+
+        <div class="divider">
+          <span>Change Password</span>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="current_password">Current Password</label>
+            <input type="password" id="current_password" name="current_password" autocomplete="current-password" placeholder="••••••••" />
+          </div>
+          <div class="form-group">
+            <label for="new_password">New Password</label>
+            <input type="password" id="new_password" name="new_password" autocomplete="new-password" placeholder="At least 8 characters" />
+          </div>
+          <div class="form-group">
+            <label for="confirm_password">Confirm New Password</label>
+            <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" placeholder="Repeat new password" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="btn btn-primary" id="save-btn">
+            <span class="btn-text">Save Changes</span>
+            <span class="btn-spinner hidden" aria-hidden="true">⏳</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="assets/js/modules/profile.js"></script>
+</body>
+</html>

@@ -9,6 +9,7 @@ export const ROUTES = {
   REGISTER: "register.html",
   DASHBOARD: "dashboard.html",
   EDITOR: "editor.html",
+  PROFILE: "profile.html",
 };
 
 export const TEMPLATES = ["modern", "classic", "minimal"];
