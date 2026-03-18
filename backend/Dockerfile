@@ -19,5 +19,5 @@ COPY . /app/
 # Expose port
 EXPOSE 5000
 
-# Run the application
-CMD ["python", "run.py"]
+# Run with gunicorn in production, fallback to Flask dev server if needed
+CMD ["sh", "-c", "if [ \"$FLASK_ENV\" = 'production' ]; then gunicorn -b 0.0.0.0:5000 'app:create_app()'; else python run.py; fi"]
