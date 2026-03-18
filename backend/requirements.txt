@@ -7,3 +7,4 @@ bcrypt==5.0.0
 flask-bcrypt==1.0.1
 dnspython==2.8.0
 pytest==9.0.2
+gunicorn
