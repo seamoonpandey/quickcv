@@ -24,10 +24,14 @@ export function renderTemplate(cvData, template = "modern") {
   const hasCustomSections = customSections.some(
     (s) => s && (s.title || s.content)
   );
+  const hasSocialLinks = Array.isArray(pi.social_links)
+    ? pi.social_links.some((l) => l && (l.label || l.url))
+    : false;
 
   const hasContent =
     pi.full_name ||
     pi.email ||
+    hasSocialLinks ||
     education.length > 0 ||
     experience.length > 0 ||
     skills.length > 0 ||
@@ -53,6 +57,7 @@ export function renderTemplate(cvData, template = "modern") {
 function renderHeader(pi, template) {
   const name = escapeHtml(pi.full_name) || "Your Name";
   const contactParts = [];
+  const socialLinks = Array.isArray(pi.social_links) ? pi.social_links : [];
 
   if (pi.email) contactParts.push(`<span>${escapeHtml(pi.email)}</span>`);
   if (pi.phone) contactParts.push(`<span>${escapeHtml(pi.phone)}</span>`);
@@ -62,6 +67,15 @@ function renderHeader(pi, template) {
       `<span><a href="${escapeHtml(pi.website)}" target="_blank" rel="noopener">${escapeHtml(pi.website)}</a></span>`
     );
   }
+  socialLinks
+    .filter((link) => link && (link.label || link.url))
+    .forEach((link) => {
+      const label = link.label ? escapeHtml(link.label) : escapeHtml(link.url);
+      const url = escapeHtml(link.url || "#");
+      contactParts.push(
+        `<span><a href="${url}" target="_blank" rel="noopener">${label}</a></span>`
+      );
+    });
 
   const contactHtml = contactParts.length
     ? `<div class="cv-contact">${contactParts.join("")}</div>`

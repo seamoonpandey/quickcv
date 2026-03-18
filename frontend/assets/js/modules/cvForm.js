@@ -54,6 +54,10 @@ async function init() {
   }
 
   cvData = res.data;
+  cvData.personal_info = {
+    ...DEFAULT_CV.personal_info,
+    ...(cvData.personal_info || {}),
+  };
   currentTemplate = cvData.template || "modern";
 
   populateForm();
@@ -73,6 +77,7 @@ function populateForm() {
   setValue("pi-location", pi.location);
   setValue("pi-website", pi.website);
   setValue("pi-summary", pi.summary);
+  renderSocialLinks();
 
   renderEducationList();
   renderExperienceList();
@@ -86,8 +91,92 @@ function setValue(id, value) {
   if (el) el.value = value || "";
 }
 
+// ── SOCIAL LINKS ───────────────────────────────────────────
+document
+  .getElementById("add-social-link-btn")
+  ?.addEventListener("click", addSocialLink);
+
+function ensureSocialLinksArray() {
+  if (!cvData.personal_info) cvData.personal_info = {};
+  if (!Array.isArray(cvData.personal_info.social_links)) {
+    cvData.personal_info.social_links = [];
+  }
+}
+
+function addSocialLink() {
+  ensureSocialLinksArray();
+  cvData.personal_info.social_links.push({ label: "", url: "" });
+  renderSocialLinks();
+  triggerPreviewUpdate();
+}
+
+function renderSocialLinks() {
+  ensureSocialLinksArray();
+  const container = document.getElementById("social-links-list");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  cvData.personal_info.social_links.forEach((link, index) => {
+    const row = document.createElement("div");
+    row.className = "social-link-row";
+    row.setAttribute("data-index", index);
+    row.innerHTML = `
+      <div>
+        <label for="social-link-label-${index}" class="sr-only">Label</label>
+        <input
+          type="text"
+          id="social-link-label-${index}"
+          placeholder="GitHub"
+          value="${escapeHtml(link.label || "")}"
+          data-index="${index}"
+          data-key="label"
+        />
+      </div>
+      <div>
+        <label for="social-link-url-${index}" class="sr-only">URL</label>
+        <input
+          type="url"
+          id="social-link-url-${index}"
+          placeholder="https://github.com/username"
+          value="${escapeHtml(link.url || "")}"
+          data-index="${index}"
+          data-key="url"
+        />
+      </div>
+      <button
+        type="button"
+        class="social-link-remove"
+        aria-label="Remove social link ${index + 1}"
+        data-index="${index}"
+      >✕</button>
+    `;
+
+    row.querySelectorAll("input").forEach((el) => {
+      el.addEventListener("input", (e) => {
+        const { index: i, key } = e.target.dataset;
+        if (cvData.personal_info.social_links[i]) {
+          cvData.personal_info.social_links[i][key] = e.target.value;
+        }
+        triggerPreviewUpdate();
+      });
+    });
+
+    row.querySelector(".social-link-remove")?.addEventListener("click", (e) => {
+      const i = Number(e.target.dataset.index);
+      cvData.personal_info.social_links.splice(i, 1);
+      renderSocialLinks();
+      triggerPreviewUpdate();
+    });
+
+    container.appendChild(row);
+  });
+}
+
 // ── Collect Form Data ──────────────────────────────────────
 function collectFormData() {
+  const pi = cvData.personal_info || {};
+
   return {
     title: document.getElementById("cv-title")?.value || "Untitled CV",
     template: currentTemplate,
@@ -97,6 +186,12 @@ function collectFormData() {
       phone: document.getElementById("pi-phone")?.value || "",
       location: document.getElementById("pi-location")?.value || "",
       website: document.getElementById("pi-website")?.value || "",
+      social_links: Array.isArray(pi.social_links)
+        ? pi.social_links.map((link) => ({
+            label: link.label || "",
+            url: link.url || "",
+          }))
+        : [],
       summary: document.getElementById("pi-summary")?.value || "",
     },
     education: cvData.education || [],

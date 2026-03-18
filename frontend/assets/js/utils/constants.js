@@ -30,6 +30,7 @@ export const DEFAULT_CV = {
     phone: "",
     location: "",
     website: "",
+    social_links: [],
     summary: "",
   },
   education: [],

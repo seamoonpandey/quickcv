@@ -13,6 +13,7 @@ def new_cv_doc(user_id, title="Untitled CV", template="modern"):
             "phone": "",
             "location": "",
             "website": "",
+            "social_links": [],
             "summary": ""
         },
         "education": [],
