@@ -1,0 +1,14 @@
+# Netlify configuration for static site
+[build]
+  publish = "frontend"
+
+# Redirect all requests to index.html (for SPAs)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
