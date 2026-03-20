@@ -573,3 +573,231 @@
 .template-sidebar .cv-sb-skills li {
   margin-bottom: 0.2rem;
 }
+
+/* ==============================
+   TEMPLATE: SLATE (Dark header + soft sidebar)
+   ============================== */
+.template-slate .cv-slate {
+  margin: -20mm;
+}
+
+.template-slate .cv-slate-header {
+  background: #343a40;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 12mm 12mm;
+  position: relative;
+}
+
+.template-slate .cv-slate-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -14mm;
+  width: 0;
+  height: 0;
+  border-top: 14mm solid #343a40;
+  border-right: 70mm solid transparent;
+}
+
+.template-slate .cv-slate-photo {
+  flex: 0 0 auto;
+}
+
+.template-slate .cv-slate-photo-img,
+.template-slate .cv-slate-photo-placeholder {
+  width: 78px;
+  height: 78px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: #6c757d;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+}
+
+.template-slate .cv-slate-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.template-slate .cv-slate-role {
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
+.template-slate .cv-slate-body {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  min-height: calc(297mm - 40mm - 28mm);
+  margin-top: -14mm;
+}
+
+.template-slate .cv-slate-left {
+  background: #e7dfd6;
+  padding: 18mm 10mm 16mm;
+  position: relative;
+  overflow: hidden;
+}
+
+.template-slate .cv-slate-right {
+  background: #fff;
+  padding: 16mm 14mm 16mm;
+}
+
+.template-slate .cv-slate-block {
+  margin-bottom: 1.15rem;
+}
+
+.template-slate .cv-slate-block-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 0.65rem;
+}
+
+.template-slate .cv-slate-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.template-slate .cv-slate-contact-row {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  font-size: 0.78rem;
+  color: #374151;
+}
+
+.template-slate .cv-slate-contact-row a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.template-slate .cv-slate-icon {
+  width: 16px;
+  text-align: center;
+  opacity: 0.85;
+}
+
+.template-slate .cv-slate-edu-item {
+  margin-bottom: 0.9rem;
+}
+
+.template-slate .cv-slate-edu-title {
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #111827;
+}
+
+.template-slate .cv-slate-edu-sub {
+  font-size: 0.78rem;
+  color: #374151;
+  margin-top: 0.15rem;
+}
+
+.template-slate .cv-slate-edu-years {
+  font-size: 0.72rem;
+  color: #6b7280;
+  margin-top: 0.15rem;
+}
+
+.template-slate .cv-slate-skills {
+  margin: 0;
+  padding-left: 1.05rem;
+  color: #374151;
+  font-size: 0.78rem;
+  line-height: 1.75;
+}
+
+.template-slate .cv-slate-left-photo {
+  position: absolute;
+  left: -10mm;
+  bottom: -24mm;
+  width: 90mm;
+  height: 90mm;
+  border-radius: 999px;
+  overflow: hidden;
+  opacity: 0.9;
+}
+
+.template-slate .cv-slate-left-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.15);
+}
+
+.template-slate .cv-slate-section {
+  margin-bottom: 1.05rem;
+}
+
+.template-slate .cv-slate-section-title {
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: #111827;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #111827;
+  margin-bottom: 0.65rem;
+}
+
+.template-slate .cv-slate-summary {
+  font-size: 0.82rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.template-slate .cv-slate-exp-item {
+  margin-bottom: 0.95rem;
+}
+
+.template-slate .cv-slate-exp-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.template-slate .cv-slate-exp-role {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #111827;
+}
+
+.template-slate .cv-slate-exp-company {
+  font-weight: 800;
+}
+
+.template-slate .cv-slate-exp-years {
+  font-size: 0.72rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.template-slate .cv-slate-exp-desc,
+.template-slate .cv-slate-cert-desc,
+.template-slate .cv-slate-custom {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  color: #374151;
+  line-height: 1.55;
+}
+
+.template-slate .cv-slate-cert-item {
+  margin-bottom: 0.85rem;
+}
+
+.template-slate .cv-slate-cert-title {
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #111827;
+}
+
+.template-slate .cv-slate-cert-meta {
+  margin-top: 0.15rem;
+  font-size: 0.72rem;
+  color: #6b7280;
+}

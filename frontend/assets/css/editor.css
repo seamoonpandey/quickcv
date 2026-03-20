@@ -466,3 +466,13 @@
   background-size: 38% 100%, 62% 26px, 52% 6px, 46% 6px;
   background-position: 0 0, 38% 0, 44% 44px, 44% 62px;
 }
+
+.template-thumb-slate {
+  background-image:
+    linear-gradient(#343a40 0 0),
+    linear-gradient(#e7dfd6 0 0),
+    linear-gradient(#cbd5e1 0 0),
+    linear-gradient(#cbd5e1 0 0);
+  background-size: 100% 26px, 38% calc(100% - 26px), 52% 6px, 46% 6px;
+  background-position: 0 0, 0 26px, 44% 44px, 44% 62px;
+}
