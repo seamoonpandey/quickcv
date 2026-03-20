@@ -1,6 +1,6 @@
-# QuickCV Production Deployment
+# Talentio Production Deployment
 
-This directory contains configuration for deploying QuickCV in production using Docker Compose.
+This directory contains configuration for deploying Talentio in production using Docker Compose.
 
 ## Services
 

@@ -1,5 +1,5 @@
 // =========================================================
-// AUTH API — Quick CV
+// AUTH API — Talentio
 // Handles all auth-related API calls to the Flask backend
 // =========================================================
 

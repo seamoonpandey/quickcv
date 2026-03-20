@@ -1,5 +1,5 @@
 // =========================================================
-// CV API — Quick CV
+// CV API — Talentio
 // Handles all CV-related API calls to the Flask backend
 // =========================================================
 

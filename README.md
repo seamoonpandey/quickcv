@@ -1,7 +1,7 @@
 
-# Quick CV
+# Talentio
 
-Quick CV is a modern web-based application for building, previewing, and exporting professional CVs with ease. Users can create, edit, and manage their CVs, then export them as PDFs for job applications or personal use.
+Talentio is a modern web-based application for building, previewing, and exporting professional CVs with ease. Users can create, edit, and manage their CVs, then export them as PDFs for job applications or personal use.
 
 ## Features
 

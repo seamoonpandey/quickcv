@@ -1,5 +1,5 @@
 // =========================================================
-// DASHBOARD MODULE — Quick CV
+// DASHBOARD MODULE — Talentio
 // Loads and manages the user's CV list
 // =========================================================
 

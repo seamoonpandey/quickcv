@@ -1,5 +1,5 @@
 // =========================================================
-// TEMPLATES MODULE — Quick CV
+// TEMPLATES MODULE — Talentio
 // Renders CV data into HTML using chosen template
 // =========================================================
 

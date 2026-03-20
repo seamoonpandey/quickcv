@@ -1,5 +1,5 @@
 // =========================================================
-// PREVIEW MODULE — Quick CV
+// PREVIEW MODULE — Talentio
 // Updates the live CV preview panel
 // =========================================================
 

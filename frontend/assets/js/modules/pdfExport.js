@@ -1,5 +1,5 @@
 // =========================================================
-// PDF EXPORT MODULE — Quick CV
+// PDF EXPORT MODULE — Talentio
 // Exports the live preview as a PDF using html2canvas + jsPDF
 // =========================================================
 

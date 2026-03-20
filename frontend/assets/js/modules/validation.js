@@ -1,5 +1,5 @@
 // =========================================================
-// VALIDATION — Quick CV
+// VALIDATION — Talentio
 // Client-side form validation helpers
 // =========================================================
 

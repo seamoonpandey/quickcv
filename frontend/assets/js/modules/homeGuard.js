@@ -1,5 +1,5 @@
 // =========================================================
-// HOME GUARD — Quick CV
+// HOME GUARD — Talentio
 // Redirects logged-in users away from the marketing page
 // =========================================================
 

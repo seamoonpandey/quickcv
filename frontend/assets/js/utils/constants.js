@@ -1,5 +1,5 @@
 // =========================================================
-// CONSTANTS — Quick CV
+// CONSTANTS — Talentio
 // =========================================================
 
 // API_BASE is loaded from window._env_ or defaults to localhost

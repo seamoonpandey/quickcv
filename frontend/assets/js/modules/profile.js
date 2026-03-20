@@ -1,5 +1,5 @@
 // =========================================================
-// PROFILE MODULE — Quick CV
+// PROFILE MODULE — Talentio
 // Handles fetching and updating the user's profile
 // =========================================================
 

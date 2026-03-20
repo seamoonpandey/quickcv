@@ -1,5 +1,5 @@
 // =========================================================
-// CV FORM MODULE — Quick CV
+// CV FORM MODULE — Talentio
 // The main editor page controller
 // Handles: form inputs, tabs, entries, skills,
 //          template switching, autosave, PDF export

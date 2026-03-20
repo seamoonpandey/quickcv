@@ -1,5 +1,5 @@
 // =========================================================
-// UPLOAD API — Quick CV
+// UPLOAD API — Talentio
 // Cloudinary signed upload helpers
 // =========================================================
 

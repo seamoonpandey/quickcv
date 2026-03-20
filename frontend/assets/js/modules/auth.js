@@ -1,5 +1,5 @@
 // =========================================================
-// AUTH MODULE — Quick CV
+// AUTH MODULE — Talentio
 // Handles register and login page logic
 // =========================================================
 
