@@ -594,12 +594,13 @@
 .template-slate .cv-slate-header::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -14mm;
-  width: 0;
-  height: 0;
-  border-top: 14mm solid #343a40;
-  border-right: 70mm solid transparent;
+  left: 18mm;
+  bottom: -8mm;
+  width: 24mm;
+  height: 10mm;
+  background: #343a40;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  z-index: 1;
 }
 
 .template-slate .cv-slate-photo {
@@ -632,7 +633,7 @@
   display: grid;
   grid-template-columns: 38% 62%;
   min-height: calc(297mm - 40mm - 28mm);
-  margin-top: -14mm;
+  margin-top: 0;
 }
 
 .template-slate .cv-slate-left {
@@ -713,24 +714,6 @@
   line-height: 1.75;
 }
 
-.template-slate .cv-slate-left-photo {
-  position: absolute;
-  left: -10mm;
-  bottom: -24mm;
-  width: 90mm;
-  height: 90mm;
-  border-radius: 999px;
-  overflow: hidden;
-  opacity: 0.9;
-}
-
-.template-slate .cv-slate-left-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: grayscale(0.15);
-}
-
 .template-slate .cv-slate-section {
   margin-bottom: 1.05rem;
 }
@@ -784,6 +767,7 @@
   font-size: 0.8rem;
   color: #374151;
   line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .template-slate .cv-slate-cert-item {
@@ -800,4 +784,8 @@
   margin-top: 0.15rem;
   font-size: 0.72rem;
   color: #6b7280;
+}
+
+.template-slate .cv-slate-contact-row span {
+  overflow-wrap: anywhere;
 }

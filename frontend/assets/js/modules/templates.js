@@ -207,7 +207,6 @@ function renderSlateTemplate(cvData) {
             </div>
           ` : ""}
 
-          ${imageUrl ? `<div class="cv-slate-left-photo" aria-hidden="true"><img src="${imageUrl}" alt="" crossorigin="anonymous" /></div>` : ""}
         </aside>
 
         <main class="cv-slate-right">
