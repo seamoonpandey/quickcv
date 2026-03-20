@@ -43,6 +43,10 @@ export function renderTemplate(cvData, template = "modern") {
     return `<p class="cv-preview-empty">Start filling in your details to see a preview here.</p>`;
   }
 
+  if (template === "sidebar") {
+    return renderSidebarTemplate(cvData);
+  }
+
   return `
     ${renderHeader(pi, template)}
     ${pi.summary ? renderSummary(pi.summary, template) : ""}
@@ -51,6 +55,175 @@ export function renderTemplate(cvData, template = "modern") {
     ${hasCertificates ? renderCertificates(certificates, template) : ""}
     ${hasCustomSections ? renderCustomSections(customSections, template) : ""}
     ${skills.length > 0 ? renderSkills(skills, template) : ""}
+  `;
+}
+
+// ── Sidebar Template (Pixel-style) ───────────────────────
+function renderSidebarTemplate(cvData) {
+  const pi = cvData.personal_info || {};
+  const education = cvData.education || [];
+  const experience = cvData.experience || [];
+  const skills = cvData.skills || [];
+  const certificates = cvData.certificates || [];
+  const customSections = cvData.custom_sections || [];
+
+  const name = escapeHtml(pi.full_name) || "Your Name";
+  const title = experience?.[0]?.job_title ? escapeHtml(experience[0].job_title) : "";
+  const imageUrl = pi.profile_image ? escapeHtml(pi.profile_image) : "";
+
+  const about = pi.summary ? escapeHtml(pi.summary) : "";
+  const socialLinks = Array.isArray(pi.social_links) ? pi.social_links : [];
+  const hasSocial = socialLinks.some((l) => l && (l.label || l.url));
+  const hasContact = Boolean(pi.email || pi.phone || pi.location || pi.website || hasSocial);
+
+  const contactRows = [
+    pi.email
+      ? `<div class="cv-sb-contact-row"><span class="cv-sb-contact-icon">✉</span><span class="cv-sb-contact-text">${escapeHtml(pi.email)}</span></div>`
+      : "",
+    pi.phone
+      ? `<div class="cv-sb-contact-row"><span class="cv-sb-contact-icon">☎</span><span class="cv-sb-contact-text">${escapeHtml(pi.phone)}</span></div>`
+      : "",
+    pi.location
+      ? `<div class="cv-sb-contact-row"><span class="cv-sb-contact-icon">⌂</span><span class="cv-sb-contact-text">${escapeHtml(pi.location)}</span></div>`
+      : "",
+    pi.website
+      ? `<div class="cv-sb-contact-row"><span class="cv-sb-contact-icon">⟲</span><span class="cv-sb-contact-text"><a href="${escapeHtml(pi.website)}" target="_blank" rel="noopener">${escapeHtml(pi.website)}</a></span></div>`
+      : "",
+    ...socialLinks
+      .filter((link) => link && (link.label || link.url))
+      .map((link) => {
+        const label = link.label ? escapeHtml(link.label) : escapeHtml(link.url);
+        const url = escapeHtml(link.url || "#");
+        return `<div class="cv-sb-contact-row"><span class="cv-sb-contact-icon">↗</span><span class="cv-sb-contact-text"><a href="${url}" target="_blank" rel="noopener">${label}</a></span></div>`;
+      }),
+  ].join("");
+
+  const educationItems = education
+    .filter((e) => e && (e.institution || e.degree || e.start_date || e.end_date))
+    .map((e) => {
+      const years = formatDateRange(e.start_date, e.end_date);
+      return `
+        <div class="cv-sb-edu-item">
+          <div class="cv-sb-edu-title">${escapeHtml(e.institution || e.degree || "Education")}</div>
+          ${e.degree ? `<div class="cv-sb-edu-sub">${escapeHtml(e.degree)}</div>` : ""}
+          ${years ? `<div class="cv-sb-edu-years">${escapeHtml(years)}</div>` : ""}
+        </div>
+      `;
+    })
+    .join("");
+
+  const experienceItems = experience
+    .filter((e) => e && (e.job_title || e.company || e.start_date || e.end_date || e.description))
+    .map((e) => {
+      const years = formatDateRange(e.start_date, e.end_date);
+      return `
+        <div class="cv-sb-exp-item">
+          <div class="cv-sb-exp-role">${escapeHtml(e.job_title || "Role")}</div>
+          <div class="cv-sb-exp-meta">
+            ${e.company ? `<span class="cv-sb-exp-company">${escapeHtml(e.company)}</span>` : ""}
+            ${years ? `<span class="cv-sb-exp-years">${escapeHtml(years)}</span>` : ""}
+          </div>
+          ${e.description ? `<div class="cv-sb-exp-desc">${escapeHtml(e.description)}</div>` : ""}
+        </div>
+      `;
+    })
+    .join("");
+
+  const skillsItems = (skills || [])
+    .filter(Boolean)
+    .map((s) => `<li>${escapeHtml(s)}</li>`)
+    .join("");
+
+  const certificateItems = (certificates || [])
+    .filter((c) => c && (c.name || c.issuer || c.date || c.description))
+    .map((c) => {
+      const meta = [c.issuer, c.date].filter(Boolean).map(escapeHtml).join(" • ");
+      return `
+        <div class="cv-sb-cert-item">
+          <div class="cv-sb-cert-title">${escapeHtml(c.name || "Certificate")}</div>
+          ${meta ? `<div class="cv-sb-cert-meta">${meta}</div>` : ""}
+          ${c.description ? `<div class="cv-sb-cert-desc">${escapeHtml(c.description)}</div>` : ""}
+        </div>
+      `;
+    })
+    .join("");
+
+  const customSectionItems = (customSections || [])
+    .filter((s) => s && (s.title || s.content))
+    .map((s) => {
+      return `
+        <div class="cv-sb-custom-item">
+          <div class="cv-sb-custom-title">${escapeHtml(s.title || "Custom")}</div>
+          ${s.content ? `<div class="cv-sb-custom-desc">${escapeHtml(s.content)}</div>` : ""}
+        </div>
+      `;
+    })
+    .join("");
+
+  return `
+    <div class="cv-sb">
+      <aside class="cv-sb-left">
+        <div class="cv-sb-photo">
+          ${imageUrl ? `<img class="cv-sb-photo-img" src="${imageUrl}" alt="" crossorigin="anonymous" />` : `<div class="cv-sb-photo-placeholder"></div>`}
+        </div>
+
+        ${about ? `
+          <section class="cv-sb-block">
+            <h2 class="cv-sb-heading">ABOUT ME</h2>
+            <p class="cv-sb-about">${about}</p>
+          </section>
+        ` : ""}
+
+        ${hasContact ? `
+          <section class="cv-sb-block">
+            <h2 class="cv-sb-heading">CONTACT</h2>
+            <div class="cv-sb-contact">${contactRows}</div>
+          </section>
+        ` : ""}
+
+        ${educationItems ? `
+          <section class="cv-sb-block">
+            <h2 class="cv-sb-heading">EDUCATION</h2>
+            <div class="cv-sb-edu">${educationItems}</div>
+          </section>
+        ` : ""}
+      </aside>
+
+      <main class="cv-sb-right">
+        <header class="cv-sb-header">
+          <div class="cv-sb-name">${name}</div>
+          ${title ? `<div class="cv-sb-title">${title}</div>` : ""}
+        </header>
+
+        ${experienceItems ? `
+          <section class="cv-sb-section">
+            <h2 class="cv-sb-section-title">WORK EXPERIENCE</h2>
+            <div class="cv-sb-exp">${experienceItems}</div>
+          </section>
+        ` : ""}
+
+        ${skillsItems ? `
+          <section class="cv-sb-section">
+            <h2 class="cv-sb-section-title">SKILLS</h2>
+            <ul class="cv-sb-skills">${skillsItems}</ul>
+          </section>
+        ` : ""}
+
+        ${certificateItems ? `
+          <section class="cv-sb-section">
+            <h2 class="cv-sb-section-title">CERTIFICATES</h2>
+            <div class="cv-sb-certs">${certificateItems}</div>
+          </section>
+        ` : ""}
+
+        ${customSectionItems ? `
+          <section class="cv-sb-section">
+            <h2 class="cv-sb-section-title">ADDITIONAL</h2>
+            <div class="cv-sb-custom">${customSectionItems}</div>
+          </section>
+        ` : ""}
+      </main>
+    </div>
   `;
 }
 
@@ -64,7 +237,7 @@ function renderHeader(pi, template) {
   const profileImageHtml = profileImageUrl
     ? `
       <div class="cv-profile-image-wrap" aria-hidden="true">
-        <img class="cv-profile-image" src="${profileImageUrl}" alt="" />
+        <img class="cv-profile-image" src="${profileImageUrl}" alt="" crossorigin="anonymous" />
       </div>
     `
     : "";

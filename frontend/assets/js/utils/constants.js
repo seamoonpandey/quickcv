@@ -13,12 +13,13 @@ export const ROUTES = {
   PROFILE: "profile.html",
 };
 
-export const TEMPLATES = ["modern", "classic", "minimal"];
+export const TEMPLATES = ["modern", "classic", "minimal", "sidebar"];
 
 export const TEMPLATE_LABELS = {
   modern: "Modern",
   classic: "Classic",
   minimal: "Minimal",
+  sidebar: "Sidebar",
 };
 
 export const DEFAULT_CV = {

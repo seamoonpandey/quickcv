@@ -354,3 +354,222 @@
   padding: 0.15rem 0.6rem;
   border-radius: 4px;
 }
+
+/* ==============================
+   TEMPLATE: SIDEBAR (Pixel-style)
+   ============================== */
+.template-sidebar .cv-sb {
+  display: flex;
+  min-height: calc(297mm - 40mm);
+  margin: -20mm;
+  position: relative;
+}
+
+.template-sidebar .cv-sb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 12mm;
+  background: #1f4b74;
+}
+
+.template-sidebar .cv-sb-left {
+  width: 34%;
+  background: #f8fafc;
+  padding: 18mm 10mm 16mm;
+  display: flex;
+  flex-direction: column;
+  gap: 10mm;
+  border-right: 1px solid #e2e8f0;
+  padding-bottom: calc(16mm + 12mm);
+}
+
+.template-sidebar .cv-sb-right {
+  width: 66%;
+  background: #fff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 12mm;
+}
+
+.template-sidebar .cv-sb-photo {
+  display: flex;
+  justify-content: center;
+}
+
+.template-sidebar .cv-sb-photo-img,
+.template-sidebar .cv-sb-photo-placeholder {
+  width: 96px;
+  height: 96px;
+  border-radius: 999px;
+  border: 4px solid #fff;
+  background: #e2e8f0;
+  object-fit: cover;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.18);
+}
+
+.template-sidebar .cv-sb-heading {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #0f172a;
+  margin-bottom: 0.6rem;
+}
+
+.template-sidebar .cv-sb-about {
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.template-sidebar .cv-sb-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.template-sidebar .cv-sb-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+.template-sidebar .cv-sb-contact-icon {
+  width: 18px;
+  text-align: center;
+  color: #1f4b74;
+  font-weight: 700;
+}
+
+.template-sidebar .cv-sb-contact-text {
+  word-break: break-word;
+}
+
+.template-sidebar .cv-sb-contact-text a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.template-sidebar .cv-sb-edu-item {
+  margin-bottom: 0.85rem;
+}
+
+.template-sidebar .cv-sb-edu-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.template-sidebar .cv-sb-edu-sub {
+  font-size: 0.8rem;
+  color: #334155;
+}
+
+.template-sidebar .cv-sb-edu-years {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+.template-sidebar .cv-sb-header {
+  background: #1f4b74;
+  color: #fff;
+  padding: 14mm 12mm 10mm;
+}
+
+.template-sidebar .cv-sb-name {
+  font-size: 1.6rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.template-sidebar .cv-sb-title {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.template-sidebar .cv-sb-section {
+  padding: 10mm 12mm 0;
+}
+
+.template-sidebar .cv-sb-section-title {
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #0f172a;
+  margin-bottom: 0.8rem;
+}
+
+.template-sidebar .cv-sb-exp-item {
+  margin-bottom: 1.1rem;
+}
+
+.template-sidebar .cv-sb-exp-role {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: #0f172a;
+}
+
+.template-sidebar .cv-sb-exp-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.template-sidebar .cv-sb-exp-desc {
+  margin-top: 0.45rem;
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.template-sidebar .cv-sb-cert-item,
+.template-sidebar .cv-sb-custom-item {
+  margin-bottom: 0.9rem;
+}
+
+.template-sidebar .cv-sb-cert-title,
+.template-sidebar .cv-sb-custom-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.template-sidebar .cv-sb-cert-meta {
+  margin-top: 0.15rem;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.template-sidebar .cv-sb-cert-desc,
+.template-sidebar .cv-sb-custom-desc {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+.template-sidebar .cv-sb-skills {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #334155;
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+.template-sidebar .cv-sb-skills li {
+  margin-bottom: 0.2rem;
+}

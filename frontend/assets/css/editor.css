@@ -456,3 +456,13 @@
   background-position: 0 10px, 6% 30px, 6% 50px, 6% 70px;
   box-shadow: 0 0 0 1px var(--color-border) inset, 0 6px 14px rgba(15, 23, 42, 0.08);
 }
+
+.template-thumb-sidebar {
+  background-image:
+    linear-gradient(#1f4b74 0 0),
+    linear-gradient(#e2e8f0 0 0),
+    linear-gradient(#cbd5e1 0 0),
+    linear-gradient(#cbd5e1 0 0);
+  background-size: 38% 100%, 62% 26px, 52% 6px, 46% 6px;
+  background-position: 0 0, 38% 0, 44% 44px, 44% 62px;
+}
