@@ -47,6 +47,17 @@ Quick CV is a modern web-based application for building, previewing, and exporti
  python run.py
  ```
 
+### Cloudinary (Profile Image Uploads)
+
+Profile images can be uploaded to Cloudinary (recommended) and stored as a URL on the CV.
+
+Set these environment variables in your backend `.env`:
+
+- `CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+- `CLOUDINARY_FOLDER` (optional, default: `quickcv`)
+
 1. **Open the frontend:**
 
 - Open `frontend/index.html` in your browser

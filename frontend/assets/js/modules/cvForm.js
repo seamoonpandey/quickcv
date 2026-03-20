@@ -7,6 +7,7 @@
 
 import { apiGetMe } from "../api/authApi.js";
 import { apiGetCV, apiCreateCV, apiUpdateCV } from "../api/cvApi.js";
+import { apiGetCloudinarySignature, apiUploadImageToCloudinary } from "../api/uploadApi.js";
 import { updatePreview } from "./preview.js";
 import { exportToPDF } from "./pdfExport.js";
 import {
@@ -117,21 +118,47 @@ document.getElementById("pi-profile-image")?.addEventListener("change", (e) => {
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    const dataUrl = typeof reader.result === "string" ? reader.result : "";
-    if (!cvData.personal_info) cvData.personal_info = {};
-    cvData.personal_info.profile_image = dataUrl;
-    syncProfileImageUI(dataUrl);
-    triggerPreviewUpdate();
-    autoSave();
-  };
-  reader.onerror = () => {
-    showAlert("alert-box", "Failed to read image file.", "error");
-  };
-
-  reader.readAsDataURL(file);
+  uploadProfileImage(file, e.target);
 });
+
+async function uploadProfileImage(file, inputEl) {
+  const statusEl = document.getElementById("save-status");
+
+  try {
+    if (inputEl) inputEl.disabled = true;
+    if (statusEl) statusEl.textContent = "Uploading image...";
+
+    const sigRes = await apiGetCloudinarySignature();
+    if (!sigRes?.success || !sigRes.data) {
+      showAlert("alert-box", sigRes?.message || "Unable to start image upload.", "error");
+      return;
+    }
+
+    const uploadRes = await apiUploadImageToCloudinary(file, sigRes.data);
+    const secureUrl = uploadRes && (uploadRes.secure_url || uploadRes.url);
+    if (!secureUrl) {
+      const msg = uploadRes?.error?.message || "Image upload failed.";
+      showAlert("alert-box", msg, "error");
+      return;
+    }
+
+    if (!cvData.personal_info) cvData.personal_info = {};
+    cvData.personal_info.profile_image = secureUrl;
+
+    syncProfileImageUI(secureUrl);
+    triggerPreviewUpdate();
+    await autoSave();
+  } catch (err) {
+    console.error("[cvForm] uploadProfileImage error:", err);
+    showAlert("alert-box", "Image upload failed. Please try again.", "error");
+  } finally {
+    if (inputEl) inputEl.disabled = false;
+    if (statusEl) {
+      // autoSave() will set a final status; avoid overwriting it
+      if (statusEl.textContent === "Uploading image...") statusEl.textContent = "";
+    }
+  }
+}
 
 document.getElementById("pi-profile-image-remove")?.addEventListener("click", () => {
   if (!cvData.personal_info) cvData.personal_info = {};
