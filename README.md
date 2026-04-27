@@ -47,11 +47,22 @@ Talentio is a modern web-based application for building, previewing, and exporti
  python run.py
  ```
 
-### Cloudinary (Profile Image Uploads)
+### Profile Image Upload Storage
 
-Profile images can be uploaded to Cloudinary (recommended) and stored as a URL on the CV.
+Profile image upload mode is controlled by backend environment variables.
 
 Set these environment variables in your backend `.env`:
+
+- `UPLOAD_STORAGE=local` or `UPLOAD_STORAGE=cloud`
+- `UPLOAD_DIR` (optional, default: `backend/uploads`)
+- `MAX_IMAGE_UPLOAD_BYTES` (optional, default: `2097152`)
+
+When `UPLOAD_STORAGE=local`:
+
+- Files are stored in `/uploads` with per-user/per-month segregation under `cv_profile_images/<user_id>/YYYY/MM/`
+- URLs are served by backend as `/uploads/...`
+
+When `UPLOAD_STORAGE=cloud` (Cloudinary):
 
 - `CLOUDINARY_CLOUD_NAME`
 - `CLOUDINARY_API_KEY`

@@ -7,7 +7,12 @@
 
 import { apiGetMe } from "../api/authApi.js";
 import { apiGetCV, apiCreateCV, apiUpdateCV } from "../api/cvApi.js";
-import { apiGetCloudinarySignature, apiUploadImageToCloudinary } from "../api/uploadApi.js";
+import {
+  apiGetUploadConfig,
+  apiGetCloudinarySignature,
+  apiUploadImageToCloudinary,
+  apiUploadImageLocal,
+} from "../api/uploadApi.js";
 import { updatePreview } from "./preview.js";
 import { exportToPDF } from "./pdfExport.js";
 import {
@@ -128,24 +133,42 @@ async function uploadProfileImage(file, inputEl) {
     if (inputEl) inputEl.disabled = true;
     if (statusEl) statusEl.textContent = "Uploading image...";
 
-    const sigRes = await apiGetCloudinarySignature();
-    if (!sigRes?.success || !sigRes.data) {
-      showAlert("alert-box", sigRes?.message || "Unable to start image upload.", "error");
+    const cfgRes = await apiGetUploadConfig();
+    if (!cfgRes?.success || !cfgRes.data?.storage) {
+      showAlert("alert-box", cfgRes?.message || "Unable to start image upload.", "error");
       return;
     }
 
-    const uploadRes = await apiUploadImageToCloudinary(file, sigRes.data);
-    const secureUrl = uploadRes && (uploadRes.secure_url || uploadRes.url);
-    if (!secureUrl) {
-      const msg = uploadRes?.error?.message || "Image upload failed.";
-      showAlert("alert-box", msg, "error");
-      return;
+    let imageUrl = "";
+
+    if (cfgRes.data.storage === "local") {
+      const localRes = await apiUploadImageLocal(file);
+      if (!localRes?.success || !localRes?.data?.url) {
+        showAlert("alert-box", localRes?.message || "Image upload failed.", "error");
+        return;
+      }
+      imageUrl = localRes.data.url;
+    } else {
+      const sigRes = await apiGetCloudinarySignature();
+      if (!sigRes?.success || !sigRes.data) {
+        showAlert("alert-box", sigRes?.message || "Unable to start image upload.", "error");
+        return;
+      }
+
+      const uploadRes = await apiUploadImageToCloudinary(file, sigRes.data);
+      const secureUrl = uploadRes && (uploadRes.secure_url || uploadRes.url);
+      if (!secureUrl) {
+        const msg = uploadRes?.error?.message || "Image upload failed.";
+        showAlert("alert-box", msg, "error");
+        return;
+      }
+      imageUrl = secureUrl;
     }
 
     if (!cvData.personal_info) cvData.personal_info = {};
-    cvData.personal_info.profile_image = secureUrl;
+    cvData.personal_info.profile_image = imageUrl;
 
-    syncProfileImageUI(secureUrl);
+    syncProfileImageUI(imageUrl);
     triggerPreviewUpdate();
     await autoSave();
   } catch (err) {

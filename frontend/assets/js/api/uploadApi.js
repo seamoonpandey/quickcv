@@ -1,11 +1,27 @@
 // =========================================================
 // UPLOAD API — Talentio
-// Cloudinary signed upload helpers
+// Local/Cloud upload helpers
 // =========================================================
 
 import { API_BASE } from "../utils/constants.js";
 
 const CREDENTIALS = "include";
+
+/**
+ * Get upload backend mode.
+ * @returns {Promise<{success:boolean, data:{storage:string}|null, message?:string}>}
+ */
+export async function apiGetUploadConfig() {
+  try {
+    const res = await fetch(`${API_BASE}/uploads/config`, {
+      credentials: CREDENTIALS,
+    });
+    return await res.json();
+  } catch (err) {
+    console.error("[uploadApi] Config error:", err);
+    return { success: false, data: null, message: "Network error." };
+  }
+}
 
 /**
  * Get signed Cloudinary upload parameters from the backend.
@@ -44,4 +60,26 @@ export async function apiUploadImageToCloudinary(file, sig) {
   });
 
   return await res.json();
+}
+
+/**
+ * Upload an image file to local backend storage.
+ * @param {File} file
+ * @returns {Promise<{success:boolean,data:{url:string,path:string,storage:string}|null,message?:string}>}
+ */
+export async function apiUploadImageLocal(file) {
+  try {
+    const form = new FormData();
+    form.append("file", file);
+
+    const res = await fetch(`${API_BASE}/uploads/profile-image`, {
+      method: "POST",
+      credentials: CREDENTIALS,
+      body: form,
+    });
+    return await res.json();
+  } catch (err) {
+    console.error("[uploadApi] Local upload error:", err);
+    return { success: false, data: null, message: "Network error." };
+  }
 }
