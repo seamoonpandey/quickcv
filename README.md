@@ -61,6 +61,15 @@ When `UPLOAD_STORAGE=local`:
 
 - Files are stored in `/uploads` with per-user/per-month segregation under `cv_profile_images/<user_id>/YYYY/MM/`
 - URLs are served by backend as `/uploads/...`
+- Works for local development and production VPS deployments (no Cloudinary required)
+
+Example `.env` for local/VPS file storage:
+
+```env
+UPLOAD_STORAGE=local
+UPLOAD_DIR=backend/uploads
+MAX_IMAGE_UPLOAD_BYTES=2097152
+```
 
 When `UPLOAD_STORAGE=cloud` (Cloudinary):
 
@@ -68,6 +77,18 @@ When `UPLOAD_STORAGE=cloud` (Cloudinary):
 - `CLOUDINARY_API_KEY`
 - `CLOUDINARY_API_SECRET`
 - `CLOUDINARY_FOLDER` (optional, default: `quickcv`)
+
+Example `.env` for Cloudinary:
+
+```env
+UPLOAD_STORAGE=cloud
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+CLOUDINARY_FOLDER=quickcv
+```
+
+After changing upload env values, restart the backend server.
 
 1. **Open the frontend:**
 
